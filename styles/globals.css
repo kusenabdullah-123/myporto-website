@@ -1,16 +1,32 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.navbar-fixed {
+  @apply fixed z-[999] bg-white bg-opacity-75 backdrop-blur-sm dark:bg-dark dark:opacity-50;
+  box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.2);
+}
+.hamburger-line {
+  @apply my-2 block h-[2px] w-[30px] bg-dark dark:bg-white;
+}
+.hamburger-transision {
+  @apply transition duration-300 ease-in-out;
+}
+.hamburger-active > span:nth-child(1) {
+  @apply rotate-45;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.hamburger-active > span:nth-child(2) {
+  @apply scale-0;
+}
+.hamburger-active > span:nth-child(3) {
+  @apply -rotate-45;
 }
 
-* {
-  box-sizing: border-box;
+#dark-toogle:checked ~ label div.toogle-circle {
+  @apply translate-x-3;
+}
+
+.paginate-active {
+  @apply bg-primary text-white;
 }

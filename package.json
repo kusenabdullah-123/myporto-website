@@ -9,12 +9,33 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "axios": "^0.27.2",
+    "bcrypt": "^5.0.1",
+    "cookies-next": "^2.0.4",
+    "cors": "^2.8.5",
+    "fastest-validator": "^1.12.0",
+    "file-type": "^17.1.1",
+    "immutable": "^4.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "1.4.4-lts.1",
+    "mysql2": "^2.3.3",
     "next": "12.1.6",
+    "next-connect": "^0.12.2",
     "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "react-dom": "18.1.0",
+    "react-hook-form": "^7.31.3",
+    "sharp": "^0.30.6",
+    "suneditor": "^2.43.8",
+    "suneditor-react": "^3.4.0"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.7",
+    "cssnano": "^5.1.10",
     "eslint": "8.16.0",
-    "eslint-config-next": "12.1.6"
+    "eslint-config-next": "12.1.6",
+    "postcss": "^8.4.14",
+    "prettier": "^2.6.2",
+    "prettier-plugin-tailwindcss": "^0.1.11",
+    "tailwindcss": "^3.0.24"
   }
 }

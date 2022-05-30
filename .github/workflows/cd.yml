@@ -1,0 +1,25 @@
+name: cd
+
+on: [push]
+
+jobs:
+  cd:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Deploy Using ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd ~/next-portofolio-tailwindcss
+            git pull
+            git status
+            yarn install
+            yarn build
+            pm2 restart website --update-env
