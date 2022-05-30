@@ -144,6 +144,7 @@ const Footer = () => {
               href="https://instagram.com/kusena01"
               target="_blank"
               className="font-bold text-primary"
+              rel="noreferrer"
             >
               KusenaDev
             </a>
@@ -152,6 +153,7 @@ const Footer = () => {
               href="https://tailwindcss.com/"
               target="_blank"
               className="font-bold text-sky-500"
+              rel="noreferrer"
             >
               Tailwind CSS
             </a>

@@ -4,6 +4,7 @@ import BackToTop from "../components/front/BackToTop";
 import { useEffect } from "react";
 import mainScript from "../lib/MainScript";
 import Script from "next/script";
+import Image from "next/image";
 const About = () => {
   useEffect(() => {
     mainScript();
@@ -26,7 +27,15 @@ const About = () => {
           <div className="flex items-center justify-center py-10 px-10 md:px-28 lg:px-28">
             <div className="flex flex-col justify-evenly p-5 md:flex-row lg:flex-row">
               <div className="images mb-4 basis-5/12">
-                <img src="/image/about-image.webp" alt="image left" />
+                <div className="relative h-80 w-full">
+                  <Image
+                    src="/image/about-image.webp"
+                    alt="kusena dev image left"
+                    layout="fill"
+                    objectFit="contain"
+                  />
+                </div>
+                {/* <img src= alt="image left" /> */}
               </div>
               <div className="about basis-5/12">
                 <h2 className="mb-5 text-4xl font-bold uppercase dark:text-white">
