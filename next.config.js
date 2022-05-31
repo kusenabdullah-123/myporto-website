@@ -7,7 +7,7 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ["localhost"],
+    domains: ["localhost", "kusenadev.my.id"],
   },
 };
 
