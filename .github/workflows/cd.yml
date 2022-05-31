@@ -20,6 +20,6 @@ jobs:
             cd ~/next-portofolio-tailwindcss
             git pull
             git status
-            yarn install
-            yarn build
+            pnpm install
+            pnpm build
             pm2 restart website --update-env
