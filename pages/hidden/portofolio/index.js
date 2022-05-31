@@ -214,7 +214,7 @@ export default function HomePortofolio({ data, url }) {
 }
 
 export const getServerSideProps = async ({ req, res }) => {
-  const url = process.env.URL;
+  const url = process.env.NEXT_PUBLIC_URL;
   const { status, token } = isLogin(req, res);
   if (status == 401) {
     return {

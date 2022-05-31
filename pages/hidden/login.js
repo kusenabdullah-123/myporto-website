@@ -72,7 +72,7 @@ const Login = ({ url }) => {
 export default Login;
 
 export const getServerSideProps = ({ req, res }) => {
-  const url = process.env.URL;
+  const url = process.env.NEXT_PUBLIC_URL;
   const cookie = getCookie("login", { req, res });
   if (cookie == true) {
     return {

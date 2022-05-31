@@ -60,7 +60,7 @@ const Portofolio = ({ portofolio, url }) => {
 };
 
 export async function getServerSideProps({ req, res }) {
-  const url = process.env.URL;
+  const url = process.env.NEXT_PUBLIC_URL;
   const responsePorto = await fetch(`${url}api/portofolio/`);
   const porto = await responsePorto.json();
   const portofolio = porto.portofolio.filter((item) => item.status == "1");

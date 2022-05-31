@@ -110,7 +110,7 @@ const EditPortofolio = ({ portofolio, url }) => {
 export default EditPortofolio;
 
 export const getServerSideProps = async ({ req, res, params }) => {
-  const url = process.env.URL;
+  const url = process.env.NEXT_PUBLIC_URL;
   const { status } = isLogin(req, res);
   if (status == 401) {
     return {

@@ -265,7 +265,7 @@ export default function Blogs({ data, type, url }) {
 }
 
 export async function getServerSideProps({ req, res, params }) {
-  const url = process.env.URL;
+  const url = process.env.NEXT_PUBLIC_URL;
   const response = await fetch(`${url}api/blogs/`);
   const blogs = await response.json();
   let type = !params?.slug ? "short" : "";

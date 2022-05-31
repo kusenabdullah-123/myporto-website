@@ -57,7 +57,7 @@ export default function Home({ url, portofolio, blogs }) {
 }
 
 export async function getServerSideProps({ req, res }) {
-  const url = process.env.URL;
+  const url = process.env.NEXT_PUBLIC_URL;
   const responseBlogs = await fetch(`${url}api/blogs/?limit=3`);
   const blogs = await responseBlogs.json();
   const responsePortofolio = await fetch(`${url}api/portofolio/?limit=2`);
