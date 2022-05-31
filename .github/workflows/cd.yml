@@ -17,7 +17,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            cd ~/next-portofolio-tailwindcss
+            cd ~/myporto-website
             git pull
             git status
             pnpm install
