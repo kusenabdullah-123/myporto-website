@@ -63,6 +63,7 @@ export async function getServerSideProps({ req, res }) {
   const responsePortofolio = await fetch(`${url}api/portofolio/?limit=2`);
   const portofolio = await responsePortofolio.json();
   res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+
   return {
     props: {
       blogs: blogs.blogs,

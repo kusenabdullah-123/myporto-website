@@ -14,6 +14,7 @@ export default async function handler(req, res) {
       "SELECT `blogs`.`_id`, `blogs`.`title`, `blogs`.`metaKeyword`,`blogs`.`metaDescription`,  `blogs`.`image`,`blogs`.`description`,`blogs`.`content`, `status`,`kategori`.`_id` AS category_id,`kategori`.`kategori` FROM `blogs` join `kategori` on `blogs`.`kategori_id` = `kategori`._id where `blogs`.`_id` = ?",
       [id]
     );
+
     return res.status(200).json({ data: result });
   }
   if (req.method == "PATCH") {
