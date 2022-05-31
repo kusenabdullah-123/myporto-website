@@ -13,14 +13,11 @@ export default function Blogs({ data, type, url }) {
   useEffect(() => {
     mainScript();
   }, []);
-  if (type == "short") {
-    return (
-      <>
-        <Script src="/js/darkmode.js" />
-        {/* Header Start */}
-        <Header />
-        {/* Header End */}
-        {/* blog main Start */}
+  return (
+    <>
+      <Script src="/js/darkmode.js" />
+      <Header />
+      {type == "short" ? (
         <main className="pt-36 dark:bg-dark" id="home">
           <div className="container">
             <h1 className="mb-4 text-center text-5xl font-bold uppercase text-primary">
@@ -46,7 +43,7 @@ export default function Blogs({ data, type, url }) {
                                 id="icon-blog"
                               >
                                 <svg
-                                  xmlns="http://www.w3.org/2000/svg"
+                                  xmlns="http:www.w3.org/2000/svg"
                                   aria-hidden="true"
                                   role="img"
                                   width="30"
@@ -68,7 +65,7 @@ export default function Blogs({ data, type, url }) {
                                 className="inline-block pl-3"
                               >
                                 <svg
-                                  xmlns="http://www.w3.org/2000/svg"
+                                  xmlns="http:www.w3.org/2000/svg"
                                   aria-hidden="true"
                                   role="img"
                                   style={{ verticalAlign: "-0.125em" }}
@@ -93,7 +90,7 @@ export default function Blogs({ data, type, url }) {
                                 className="inline-block pl-3"
                               >
                                 <svg
-                                  xmlns="http://www.w3.org/2000/svg"
+                                  xmlns="http:www.w3.org/2000/svg"
                                   aria-hidden="true"
                                   role="img"
                                   style={{ verticalAlign: "-0.125em" }}
@@ -118,7 +115,7 @@ export default function Blogs({ data, type, url }) {
                                 className="inline-block pl-3"
                               >
                                 <svg
-                                  xmlns="http://www.w3.org/2000/svg"
+                                  xmlns="http:www.w3.org/2000/svg"
                                   aria-hidden="true"
                                   role="img"
                                   style={{ verticalAlign: "-0.125em" }}
@@ -188,7 +185,7 @@ export default function Blogs({ data, type, url }) {
                     <a>
                       <span className="dark:text-white">
                         <svg
-                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns="http:www.w3.org/2000/svg"
                           aria-hidden="true"
                           role="img"
                           width={30}
@@ -241,34 +238,7 @@ export default function Blogs({ data, type, url }) {
             </div>
           </div>
         </main>
-        {/* blog main End */}
-        {/* Footer */}
-        <Footer />
-        {/* Footer End */}
-        {/* Back To Top */}
-        <BackToTop />
-        {/* Back To Top */}
-        <Script
-          src="https://code.iconify.design/2/2.2.1/iconify.min.js"
-          sameSite="true"
-        />
-      </>
-    );
-  } else if (type == "long") {
-    return (
-      <>
-        <Head>
-          <title>{data.title} | M Kusen Abdullah</title>
-          <meta name="description" content={data.metaDescription} />
-          <meta name="keywords" content={data.metaKeyword} />
-          <meta name="robots" content="all" />
-        </Head>
-        <Script src="/js/darkmode.js" />
-        {/* Header Start */}
-        <Header />
-        {/* Header End */}
-        {/* blog main Start */}
-
+      ) : (
         <main className="pt-36 dark:bg-dark" id="home">
           <div className="container">
             <h1 className="mb-4 text-center text-3xl font-bold uppercase text-primary">
@@ -287,17 +257,11 @@ export default function Blogs({ data, type, url }) {
             <div className="pagination mx-auto mt-2 w-2/3 pb-8 md:w-1/3 lg:w-1/3" />
           </div>
         </main>
-
-        {/* blog main End */}
-        {/* Footer */}
-        <Footer />
-        {/* Footer End */}
-        {/* Back To Top */}
-        <BackToTop />
-        {/* Back To Top */}
-      </>
-    );
-  }
+      )}
+      <Footer />
+      <BackToTop />
+    </>
+  );
 }
 
 export async function getServerSideProps({ req, res, params }) {
