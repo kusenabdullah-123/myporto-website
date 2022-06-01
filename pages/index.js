@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import mainScript from "../lib/MainScript";
 import Head from "next/head";
 import Script from "next/script";
-
+import axios from "axios";
 export default function Home({ url, portofolio, blogs }) {
   useEffect(() => {
     mainScript();
@@ -58,16 +58,14 @@ export default function Home({ url, portofolio, blogs }) {
 
 export async function getServerSideProps({ req, res }) {
   const url = process.env.NEXT_PUBLIC_URL;
-  const responseBlogs = await fetch(`${url}api/blogs/?limit=3`);
-  const blogs = await responseBlogs.json();
-  const responsePortofolio = await fetch(`${url}api/portofolio/?limit=2`);
-  const portofolio = await responsePortofolio.json();
+  const blogs = await axios.get(`${url}api/blogs/?limit=3`);
+  const portfolio = await axios.get(`${url}api/portofolio/?limit=2`);
   res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
 
   return {
     props: {
-      blogs: blogs.blogs,
-      portofolio: portofolio.portofolio,
+      blogs: blogs.data.blogs,
+      portofolio: portfolio.data.portofolio,
       url,
     },
   };

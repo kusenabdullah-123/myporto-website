@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import mainScript from "../lib/MainScript";
 import Script from "next/script";
 import Image from "next/image";
+import axios from "axios";
 const Portofolio = ({ portofolio, url }) => {
   useEffect(() => {
     mainScript();
@@ -61,9 +62,8 @@ const Portofolio = ({ portofolio, url }) => {
 
 export async function getServerSideProps({ req, res }) {
   const url = process.env.NEXT_PUBLIC_URL;
-  const responsePorto = await fetch(`${url}api/portofolio/`);
-  const porto = await responsePorto.json();
-  const portofolio = porto.portofolio.filter((item) => item.status == "1");
+  const porto = await axios.get(`${url}api/portofolio/`);
+  const portofolio = porto.data.portofolio.filter((item) => item.status == "1");
   res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
   return {
     props: {
