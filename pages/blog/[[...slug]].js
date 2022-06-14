@@ -148,10 +148,9 @@ export default function Blogs({ data, type, url }) {
                         </figure>
                         <h2 className="mb-4 text-2xl font-bold hover:text-primary dark:text-white dark:hover:text-primary">
                           <Link
-                            href={`/blog/${item.kategori}/${item.title.replace(
-                              " ",
-                              "-"
-                            )}-${item._id}`}
+                            href={`/blog/${
+                              item.kategori
+                            }/${item.title.replaceAll(" ", "-")}-${item._id}`}
                           >
                             <a>{item.title}</a>
                           </Link>
@@ -162,7 +161,7 @@ export default function Blogs({ data, type, url }) {
                         <button
                           onClick={() => {
                             router.push(
-                              `/blog/${item.kategori}/${item.title.replace(
+                              `/blog/${item.kategori}/${item.title.replaceAll(
                                 " ",
                                 "-"
                               )}-${item._id}`
