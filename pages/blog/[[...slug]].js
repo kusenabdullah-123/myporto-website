@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import mainScript from "../../lib/MainScript";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import Head from "next/head";
+
 import Image from "next/image";
 import Script from "next/script";
 export default function Blogs({ data, type, url }) {
