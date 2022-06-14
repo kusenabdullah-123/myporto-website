@@ -18,7 +18,7 @@ jobs:
           port: 22
           script: |
             cd ~/myporto-website
-            git pull
+            git pull --force
             git status
             pnpm install
             pnpm build
