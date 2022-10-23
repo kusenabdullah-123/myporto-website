@@ -9,11 +9,12 @@ const AddPortofolio = ({ url }) => {
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
     try {
+      console.log(data);
       const formData = new FormData();
       formData.append("title", data.title);
-      formData.append("metaDesc", data.metaDesc);
-      formData.append("metaKeyword", data.metaKeyword);
       formData.append("description", data.description);
+      formData.append("github", data.github);
+      formData.append("link", data.link);
       formData.append("image", data.image[0]);
 
       const token = getCookie("token") || "";
@@ -52,25 +53,25 @@ const AddPortofolio = ({ url }) => {
                 name="title"
               />
             </label>
-            <label htmlFor="title" className="mb-4 block">
-              <span className="block">Meta Destription</span>
+            <label htmlFor="github" className="mb-4 block">
+              <span className="block">Link Github</span>
               <input
-                {...register("metaDesc")}
+                {...register("github")}
                 type="text"
                 className="block w-full mt-1 p-2 border-b-2 border-slate-400 text-sm focus:outline-none"
-                name="metaDesc"
+                name="github"
               />
             </label>
-            <label htmlFor="title" className="mb-4 block">
-              <span className="block">Meta Keyword</span>
+            <label htmlFor="link" className="mb-4 block">
+              <span className="block">Link Website</span>
               <input
-                {...register("metaKeyword")}
+                {...register("link")}
                 type="text"
                 className="block w-full mt-1 p-2 border-b-2 border-slate-400 text-sm focus:outline-none"
-                name="metaKeyword"
+                name="link"
               />
             </label>
-            <label htmlFor="title" className="mb-4 block">
+            <label htmlFor="description" className="mb-4 block">
               <span className="block">Description</span>
               <textarea
                 {...register("description")}

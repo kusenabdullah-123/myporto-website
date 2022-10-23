@@ -7,6 +7,7 @@ import querys from "../../../lib/database";
 import checkLogin from "../../../lib/checkLogin";
 import checkOldImage from "../../../lib/checkOldImage";
 import Cors from "cors";
+import { uploadImage, destroyImage } from "../../../lib/cloudinary";
 const upload = multer({
   storage: multer.diskStorage({
     destination: "./public/uploads",
@@ -32,7 +33,7 @@ apiRoute.get(async (req, res) => {
   try {
     if (req.query.limit) {
       const result = await querys(
-        "SELECT `_id`, `title`, `description`, `metaKeyword`, `metaDescription`, `status`, `image` FROM `portofolio` ORDER BY `_id` DESC LIMIT ?",
+        "SELECT `_id`, `title`, `description`,`status`,`github`,`link` ,`image` FROM `portofolio` ORDER BY `_id` DESC LIMIT ?",
         [req.query.limit]
       );
       if (result.length >= 0) {
@@ -40,7 +41,7 @@ apiRoute.get(async (req, res) => {
       }
     }
     const result = await querys(
-      "SELECT `_id`, `title`, `description`, `metaKeyword`, `metaDescription`, `status`, `image` FROM `portofolio`"
+      "SELECT `_id`, `title`, `description`,`github`,`link`,`status`, `image` FROM `portofolio`"
     );
     if (result.length >= 0) {
       return res.status(200).json({ portofolio: result });
@@ -62,18 +63,21 @@ apiRoute.post(async (req, res) => {
     } else {
       return res.status(401).json({ status: 401, message: "Unauthorized" });
     }
-    const { title, metaDesc, metaKeyword, description } = req.body;
-    const { filename } = req.file;
+    const { title, description, github, link } = req.body;
 
     const dest = path.join(__dirname, `../../../../${req.file.path}`);
     const { status } = await file.checkFile(dest);
     if (status == 200) {
-      const result = await querys(
-        "insert into portofolio (`title`,`description`,`metaKeyword`,`metaDescription`,`status`,`image`) VALUES (?,?,?,?,?,?)",
-        [title, description, metaKeyword, metaDesc, "0", filename]
-      );
-      if (result.affectedRows >= 1) {
-        return res.status(200).json({ status: 200, message: "success" });
+      const { public_id, secure_url } = await uploadImage(dest);
+      if (public_id) {
+        const result = await querys(
+          "insert into portofolio (`title`,`description`,`publicId`,`status`,`image`,github,link) VALUES (?,?,?,?,?,?,?)",
+          [title, description, public_id, "0", secure_url, github, link]
+        );
+        if (result.affectedRows >= 1) {
+          fs.unlinkSync(req.file.path);
+          return res.status(200).json({ status: 200, message: "success" });
+        }
       }
     }
   } catch (error) {
@@ -98,35 +102,48 @@ apiRoute.put(async (req, res) => {
       return res.status(401).json({ status: 401, message: "Unauthorized" });
     }
 
-    const { _id, title, metaDesc, metaKeyword, description } = req.body;
+    const { _id, title, github, link, description } = req.body;
 
     if (req.file) {
-      const { filename } = req.file;
-
       const dest = path.join(__dirname, `../../../../${req.file.path}`);
       const { status } = await file.checkFile(dest);
 
       if (status == 200) {
-        checkOldImage(_id, "portofolio");
-        const result = await querys(
-          "UPDATE `portofolio` SET `_id`=?,`title`=?,`description`=?,`metaKeyword`=?,`metaDescription`=?,`status`=?,`image`= ? WHERE `_id` = ?",
-          [_id, title, description, metaKeyword, metaDesc, "0", filename, _id]
-        );
+        const { public_id, secure_url } = await uploadImage(dest);
+        if (public_id) {
+          const result = await querys(
+            "UPDATE `portofolio` SET `_id`=?,`title`=?,`description`=?,`publicId`=?,`status`=?,`image`= ?,`github`=?,`link`=? WHERE `_id` = ?",
+            [
+              _id,
+              title,
+              description,
+              public_id,
+              "0",
+              secure_url,
+              github,
+              link,
+              _id,
+            ]
+          );
 
-        if (result.affectedRows >= 1) {
-          return res.status(200).json({ status: 200, message: "success" });
+          if (result.affectedRows >= 1) {
+            fs.unlinkSync(req.file.path);
+            return res.status(200).json({ status: 200, message: "success" });
+          }
         }
       }
     } else {
       const result = await querys(
-        "UPDATE `portofolio` SET `_id`=?,`title`=?,`description`=?,`metaKeyword`=?,`metaDescription`=?,`status`=? WHERE `_id` = ?",
-        [_id, title, description, metaKeyword, metaDesc, "0", _id]
+        "UPDATE `portofolio` SET `_id`=?,`title`=?,`description`=?,`status`=?,`github`=?,`link`= ? WHERE `_id` = ?",
+        [_id, title, description, "0", github, link, _id]
       );
       if (result.affectedRows >= 1) {
+        fs.unlinkSync(req.file.path);
         return res.status(200).json({ status: 200, message: "success" });
       }
     }
   } catch (error) {
+    console.log(error);
     if (error == 401) {
       return res.status(401).json({ status: 401, message: "Unauthorized" });
     }
@@ -139,18 +156,14 @@ apiRoute.delete(async (req, res) => {
   try {
     const { _id } = req.body;
 
-    const oldImage = await querys(
-      "SELECT `image` FROM `portofolio` WHERE `_id` = ?",
+    const publicId = await querys(
+      "SELECT `publicId` FROM `portofolio` WHERE `_id` = ?",
       [_id]
     );
-    const results = await querys("DELETE FROM `portofolio` WHERE `_id` = ? ", [
-      _id,
-    ]);
 
-    if (results.affectedRows >= 1) {
-      fs.unlinkSync(
-        path.join(__dirname, `../../../../public/uploads/${oldImage[0].image}`)
-      );
+    const { result } = await destroyImage(publicId[0].publicId);
+    if (result == "ok") {
+      await querys("DELETE FROM `portofolio` WHERE `_id` = ? ", [_id]);
       return res.status(200).json({ status: 200, message: "success" });
     } else {
       return res.status(400).json({ status: 400, message: "Data Not Found" });
