@@ -140,7 +140,7 @@ export default function Blogs({ data, type, url }) {
                           <div className="relative h-72 w-full">
                             <Image
                               priority
-                              src={`${url}api/images/${item.image}`}
+                              src={item.image}
                               alt={item.title}
                               layout="fill"
                             />

@@ -6,7 +6,8 @@ import file from "../../../lib/file";
 import fs from "fs";
 import querys from "../../../lib/database";
 import checkLogin from "../../../lib/checkLogin";
-import checkOldImage from "../../../lib/checkOldImage";
+// import checkOldImage from "../../../lib/checkOldImage";
+import { uploadImage, destroyImage } from "../../../lib/cloudinary";
 
 const upload = multer({
   storage: multer.diskStorage({
@@ -63,6 +64,7 @@ apiRoute.post(async (req, res) => {
     } else {
       return res.status(401).json({ status: 401, message: "Unauthorized" });
     }
+    console.log(req.body);
     const {
       title,
       metaDescription,
@@ -72,27 +74,35 @@ apiRoute.post(async (req, res) => {
       content,
       category_id,
     } = req.body;
-    const { filename } = req.file;
 
     const dest = path.join(__dirname, `../../../../${req.file.path}`);
     const { status } = await file.checkFile(dest);
     if (status == 200) {
-      const result = await querys(
-        "INSERT INTO `blogs`(`title`, `metaKeyword`, `metaDescription`, `description`, `date`, `image`, `content`, `status`,`kategori_id`) VALUES (?,?,?,?,?,?,?,?,?)",
-        [
-          title,
-          metaKeyword,
-          metaDescription,
-          description,
-          date,
-          filename,
-          content,
-          "0",
-          category_id,
-        ]
-      );
-      if (result.affectedRows >= 1) {
-        return res.status(200).json({ status: 200, message: "success" });
+      const { public_id, secure_url } = await uploadImage(dest);
+      if (public_id) {
+        const result = await querys(
+          "INSERT INTO `blogs`(`title`, `metaKeyword`, `metaDescription`, `description`, `date`, `publicId`, `image`, `content`, `status`,`kategori_id`) VALUES (?,?,?,?,?,?,?,?,?,?)",
+          [
+            title,
+            metaKeyword,
+            metaDescription,
+            description,
+            date,
+            public_id,
+            secure_url,
+            content,
+            "0",
+            category_id,
+          ]
+        );
+        if (result.affectedRows >= 1) {
+          fs.unlinkSync(req.file.path);
+          return res.status(200).json({ status: 200, message: "success" });
+        }
+      } else {
+        return res
+          .status(500)
+          .json({ status: 500, message: "Upload Image Error" });
       }
     }
   } catch (error) {
@@ -129,32 +139,38 @@ apiRoute.put(async (req, res) => {
     } = req.body;
 
     if (req.file) {
-      const { filename } = req.file;
-
       const dest = path.join(__dirname, `../../../../${req.file.path}`);
       const { status } = await file.checkFile(dest);
 
       if (status == 200) {
-        checkOldImage(_id, "blogs");
-        const result = await querys(
-          "UPDATE `blogs` SET `_id`=?,`title`=?,`metaKeyword`=?,`metaDescription`=?,`description`=?,`date`=?,`image`=?,`content`=?,`status`=?,`kategori_id` = ? WHERE `_id` = ?",
-          [
-            _id,
-            title,
-            metaKeyword,
-            metaDescription,
-            description,
-            date,
-            filename,
-            content,
-            "0",
-            category_id,
-            _id,
-          ]
-        );
+        const { public_id, secure_url } = await uploadImage(dest);
+        if (public_id) {
+          const result = await querys(
+            "UPDATE `blogs` SET `_id`=?,`title`=?,`metaKeyword`=?,`metaDescription`=?,`description`=?,`date`=?, `publicId`=?,`image`=?,`content`=?,`status`=?,`kategori_id` = ? WHERE `_id` = ?",
+            [
+              _id,
+              title,
+              metaKeyword,
+              metaDescription,
+              description,
+              date,
+              public_id,
+              secure_url,
+              content,
+              "0",
+              category_id,
+              _id,
+            ]
+          );
 
-        if (result.affectedRows >= 1) {
-          return res.status(200).json({ status: 200, message: "success" });
+          if (result.affectedRows >= 1) {
+            fs.unlinkSync(req.file.path);
+            return res.status(200).json({ status: 200, message: "success" });
+          }
+        } else {
+          return res
+            .status(500)
+            .json({ status: 500, message: "Upload Image Error" });
         }
       }
     } else {
@@ -189,17 +205,15 @@ apiRoute.put(async (req, res) => {
 apiRoute.delete(async (req, res) => {
   try {
     const { _id } = req.body;
-
-    const oldImage = await querys(
-      "SELECT `image` FROM `blogs` WHERE `_id` = ?",
+    const publicId = await querys(
+      "SELECT `publicId` FROM `blogs` WHERE `_id` = ?",
       [_id]
     );
-    const results = await querys("DELETE FROM `blogs` WHERE `_id` = ? ", [_id]);
 
-    if (results.affectedRows >= 1) {
-      fs.unlinkSync(
-        path.join(__dirname, `../../../../public/uploads/${oldImage[0].image}`)
-      );
+    const { result } = await destroyImage(publicId[0].publicId);
+
+    if (result == "ok") {
+      await querys("DELETE FROM `blogs` WHERE `_id` = ? ", [_id]);
       return res.status(200).json({ status: 200, message: "success" });
     } else {
       return res.status(400).json({ status: 400, message: "Data Not Found" });

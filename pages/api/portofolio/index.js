@@ -5,7 +5,7 @@ import file from "../../../lib/file";
 import fs from "fs";
 import querys from "../../../lib/database";
 import checkLogin from "../../../lib/checkLogin";
-import checkOldImage from "../../../lib/checkOldImage";
+// import checkOldImage from "../../../lib/checkOldImage";
 import Cors from "cors";
 import { uploadImage, destroyImage } from "../../../lib/cloudinary";
 const upload = multer({
@@ -78,6 +78,10 @@ apiRoute.post(async (req, res) => {
           fs.unlinkSync(req.file.path);
           return res.status(200).json({ status: 200, message: "success" });
         }
+      } else {
+        return res
+          .status(500)
+          .json({ status: 500, message: "Upload Image Error" });
       }
     }
   } catch (error) {
@@ -143,7 +147,6 @@ apiRoute.put(async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(error);
     if (error == 401) {
       return res.status(401).json({ status: 401, message: "Unauthorized" });
     }

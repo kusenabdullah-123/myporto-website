@@ -41,7 +41,7 @@ const AboutHome = () => {
               </Link>
 
               {/* instagram */}
-              <Link href="https://www.instagram.com/kusena01/">
+              <Link href="https://www.instagram.com/kusenadev01/">
                 <a className="hover mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-400 text-slate-400 hover:border-primary hover:bg-primary hover:text-white">
                   <svg
                     role="img"

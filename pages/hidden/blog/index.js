@@ -89,7 +89,7 @@ export default function HomeBlogs({ data, url }) {
                           <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
                             <img
                               className="object-cover w-full h-full rounded-full"
-                              src={`/api/images/${item.image}`}
+                              src={item.image}
                               loading="lazy"
                             />
                             <div

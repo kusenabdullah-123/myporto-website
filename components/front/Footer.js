@@ -91,7 +91,7 @@ const Footer = () => {
             </Link>
 
             {/* instagram */}
-            <Link href="https://www.instagram.com/kusena01/">
+            <Link href="https://www.instagram.com/kusenadev01/">
               <a className="hover mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-400 text-slate-400 hover:border-primary hover:bg-primary hover:text-white">
                 <svg
                   role="img"
@@ -141,7 +141,7 @@ const Footer = () => {
           <p className="text-center text-sm font-medium text-slate-500">
             Dibuat dengan <span className="text-red-600">❤</span> Oleh
             <a
-              href="https://instagram.com/kusena01"
+              href="https://www.instagram.com/kusenadev01/"
               target="_blank"
               className="font-bold text-primary"
               rel="noreferrer"

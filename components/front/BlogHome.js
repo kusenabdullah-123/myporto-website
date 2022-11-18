@@ -1,7 +1,5 @@
-// import { useRouter } from "next/router";
 import Image from "next/image";
-const BlogHome = ({ blogs, url }) => {
-  // const router = useRouter();
+const BlogHome = ({ blogs }) => {
   return (
     <section className="pt-36 pb-32 dark:bg-dark">
       <div className="container">
@@ -23,7 +21,7 @@ const BlogHome = ({ blogs, url }) => {
                     <Image
                       priority
                       alt={item.title}
-                      src={`${url}api/images/${item.image}`}
+                      src={item.image}
                       layout="fill"
                       objectFit="contain"
                     />
