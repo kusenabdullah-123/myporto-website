@@ -30,26 +30,11 @@ const heroHome = () => {
                 <Image
                   priority
                   alt="Kusen Abdullah"
-                  src="/image/images.webp"
+                  src="/image/image-about.png"
                   layout="fill"
                   objectFit="contain"
                 />
               </div>
-
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 md:scale-125">
-                <svg
-                  viewBox="0 0 200 200"
-                  height={300}
-                  width={300}
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill="#0F62FE"
-                    d="M53.4,-42.3C63.4,-30,61.8,-8.1,58,15.2C54.3,38.6,48.4,63.5,34.1,70.2C19.7,76.9,-3.2,65.5,-22.7,53.6C-42.3,41.7,-58.5,29.4,-59.9,15.8C-61.3,2.3,-47.8,-12.5,-35.3,-25.4C-22.8,-38.2,-11.4,-49.2,5.1,-53.2C21.7,-57.3,43.3,-54.6,53.4,-42.3Z"
-                    transform="translate(100 100) scale(1.1)"
-                  />
-                </svg>
-              </span>
             </div>
           </div>
         </div>
