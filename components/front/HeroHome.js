@@ -30,7 +30,7 @@ const heroHome = () => {
                 <Image
                   priority
                   alt="Kusen Abdullah"
-                  src="/image/image-about.png"
+                  src="/image/image-about.webp"
                   layout="fill"
                   objectFit="contain"
                 />

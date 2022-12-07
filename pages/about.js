@@ -29,7 +29,7 @@ const About = () => {
               <div className="images mb-4 basis-5/12">
                 <div className="relative h-80 w-full">
                   <Image
-                    src="/image/image-about.png"
+                    src="/image/image-about.webp"
                     alt="kusena dev image"
                     layout="fill"
                     objectFit="contain"
