@@ -104,7 +104,6 @@ export async function getServerSideProps({ req, res }) {
   const url = process.env.NEXT_PUBLIC_URL;
   const porto = await axios.get(`${url}api/portofolio/`);
   const portofolio = porto.data.portofolio.filter((item) => item.status == "1");
-  res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
   return {
     props: {
       portofolio,
