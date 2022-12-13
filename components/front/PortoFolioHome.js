@@ -27,8 +27,9 @@ const PortoFolioHome = ({ portofolio, url }) => {
                     priority
                     alt="Mountains"
                     src={item.image}
-                    layout="fill"
-                    objectFit="contain"
+                    sizes="100vw"
+                    fill
+                    className="object-contain"
                   />
                 </div>
                 <h3 className="mt-7 mb-3 text-xl font-semibold text-dark dark:text-white">
@@ -39,7 +40,7 @@ const PortoFolioHome = ({ portofolio, url }) => {
                 </p>
                 <div className="flex flex-wrap mt-6 p-2 items-center">
                   {/* github */}
-                  <Link href={item.github}>
+                  <Link legacyBehavior href={item.github}>
                     <a className="hover mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-400 text-slate-400 hover:border-primary hover:bg-primary hover:text-white">
                       <svg
                         role="img"
@@ -53,7 +54,7 @@ const PortoFolioHome = ({ portofolio, url }) => {
                       </svg>
                     </a>
                   </Link>
-                  <Link href={item.link}>
+                  <Link legacyBehavior href={item.link}>
                     <a className="hover mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-400 text-slate-400 hover:border-primary hover:bg-primary hover:text-white">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

@@ -15,7 +15,7 @@ const header = () => {
                 id="logo-header"
                 className="mr-2 inline-block"
               />
-              <Link href="/">
+              <Link legacyBehavior href="/">
                 <a className="inline-blockblock py-6 text-lg font-bold text-primary">
                   Kusena Dev
                 </a>
@@ -39,28 +39,28 @@ const header = () => {
             >
               <ul className="block lg:flex">
                 <li className="group">
-                  <Link href="/">
+                  <Link legacyBehavior href="/">
                     <a className="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white">
                       Home
                     </a>
                   </Link>
                 </li>
                 <li className="group">
-                  <Link href="/about">
+                  <Link legacyBehavior href="/about">
                     <a className="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white">
                       About
                     </a>
                   </Link>
                 </li>
                 <li className="group">
-                  <Link href="/portofolio">
+                  <Link legacyBehavior href="/portofolio">
                     <a className="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white">
                       Portofolio
                     </a>
                   </Link>
                 </li>
                 <li className="group">
-                  <Link href="/blog">
+                  <Link legacyBehavior href="/blog">
                     <a className="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white">
                       Blog
                     </a>

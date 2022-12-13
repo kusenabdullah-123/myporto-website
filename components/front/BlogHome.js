@@ -19,11 +19,12 @@ const BlogHome = ({ blogs }) => {
                 <div className=" mb-10 overflow-hidden rounded-xl p-1 shadow-lg dark:bg-slate-800">
                   <div className="relative h-80 w-full ">
                     <Image
+                      className="object-contain"
                       priority
                       alt={item.title}
                       src={item.image}
-                      layout="fill"
-                      objectFit="contain"
+                      lsizes="100vw"
+                      fill
                     />
                   </div>
 

@@ -31,8 +31,9 @@ const heroHome = () => {
                   priority
                   alt="Kusen Abdullah"
                   src="/image/image-about.webp"
-                  layout="fill"
-                  objectFit="contain"
+                  sizes="100vw"
+                  fill
+                  className="object-contain"
                 />
               </div>
             </div>

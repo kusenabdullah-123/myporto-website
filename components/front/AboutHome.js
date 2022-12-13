@@ -25,7 +25,10 @@ const AboutHome = () => {
             </p>
             <div className="flex flex-wrap items-center">
               {/* youtube */}
-              <Link href="https://www.youtube.com/channel/UCg_5c74BbqCVlCuiRrL-E1A">
+              <Link
+                legacyBehavior
+                href="https://www.youtube.com/channel/UCg_5c74BbqCVlCuiRrL-E1A"
+              >
                 <a className="hover mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-400 text-slate-400 hover:border-primary hover:bg-primary hover:text-white">
                   <svg
                     className="fill-current"
@@ -41,7 +44,10 @@ const AboutHome = () => {
               </Link>
 
               {/* instagram */}
-              <Link href="https://www.instagram.com/kusenadev01/">
+              <Link
+                legacyBehavior
+                href="https://www.instagram.com/kusenadev01/"
+              >
                 <a className="hover mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-400 text-slate-400 hover:border-primary hover:bg-primary hover:text-white">
                   <svg
                     role="img"
@@ -57,7 +63,10 @@ const AboutHome = () => {
               </Link>
 
               {/* facebook */}
-              <Link href="https://www.facebook.com/profile.php?id=100008397672983">
+              <Link
+                legacyBehavior
+                href="https://www.facebook.com/profile.php?id=100008397672983"
+              >
                 <a className="hover mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-400 text-slate-400 hover:border-primary hover:bg-primary hover:text-white">
                   <svg
                     role="img"
@@ -73,7 +82,7 @@ const AboutHome = () => {
               </Link>
 
               {/* github */}
-              <Link href="https://github.com/kusenabdullah-123">
+              <Link legacyBehavior href="https://github.com/kusenabdullah-123">
                 <a className="hover mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-400 text-slate-400 hover:border-primary hover:bg-primary hover:text-white">
                   <svg
                     role="img"

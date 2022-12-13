@@ -33,7 +33,9 @@ const Portofolio = ({ portofolio }) => {
                         <Image
                           src={item.image}
                           alt={item.title}
-                          layout="fill"
+                          sizes="100vw"
+                          fill
+                          className="object-contain"
                         />
                       </div>
                     </div>
@@ -45,7 +47,7 @@ const Portofolio = ({ portofolio }) => {
                     </p>
                     <div className="flex flex-wrap mt-6 p-2 items-center">
                       {/* github */}
-                      <Link href={item.github}>
+                      <Link legacyBehavior href={item.github}>
                         <a className="hover mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-400 text-slate-400 hover:border-primary hover:bg-primary hover:text-white">
                           <svg
                             role="img"
@@ -59,7 +61,7 @@ const Portofolio = ({ portofolio }) => {
                           </svg>
                         </a>
                       </Link>
-                      <Link href={item.link}>
+                      <Link legacyBehavior href={item.link}>
                         <a className="hover mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-400 text-slate-400 hover:border-primary hover:bg-primary hover:text-white">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"

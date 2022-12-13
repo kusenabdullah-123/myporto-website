@@ -31,8 +31,9 @@ const About = () => {
                   <Image
                     src="/image/image-about.webp"
                     alt="kusena dev image"
-                    layout="fill"
-                    objectFit="contain"
+                    sizes="100vw"
+                    fill
+                    className="object-contain"
                   />
                 </div>
                 {/* <img src= alt="image left" /> */}

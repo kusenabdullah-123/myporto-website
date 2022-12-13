@@ -16,21 +16,21 @@ const Footer = () => {
             </h3>
             <ul className="text-slate-300">
               <li>
-                <Link href="/blog/database">
+                <Link legacyBehavior href="/blog/database">
                   <a className="mb-3 inline-block text-base hover:text-primary">
                     Database
                   </a>
                 </Link>
               </li>
               <li>
-                <Link href="/blog/frontend">
+                <Link legacyBehavior href="/blog/frontend">
                   <a className="mb-3 inline-block text-base hover:text-primary">
                     Front End
                   </a>
                 </Link>
               </li>
               <li>
-                <Link href="/blog/backend">
+                <Link legacyBehavior href="/blog/backend">
                   <a className="mb-3 inline-block text-base hover:text-primary">
                     Backend
                   </a>
@@ -42,28 +42,28 @@ const Footer = () => {
             <h3 className="mb-5 text-2xl font-semibold text-white">Tautan</h3>
             <ul className="text-slate-300">
               <li>
-                <Link href="/">
+                <Link legacyBehavior href="/">
                   <a className="mb-3 inline-block text-base hover:text-primary">
                     Home
                   </a>
                 </Link>
               </li>
               <li>
-                <Link href="/about">
+                <Link legacyBehavior href="/about">
                   <a className="mb-3 inline-block text-base hover:text-primary">
                     About
                   </a>
                 </Link>
               </li>
               <li>
-                <Link href="/blog">
+                <Link legacyBehavior href="/blog">
                   <a className="mb-3 inline-block text-base hover:text-primary">
                     Blog
                   </a>
                 </Link>
               </li>
               <li>
-                <Link href="/portofolio">
+                <Link legacyBehavior href="/portofolio">
                   <a className="mb-3 inline-block text-base hover:text-primary">
                     Portofolio
                   </a>
@@ -75,7 +75,10 @@ const Footer = () => {
         <div className="w-full border-t border-slate-700 pt-10">
           <div className="mb-5 flex flex-wrap items-center justify-center">
             {/* youtube */}
-            <Link href="https://www.youtube.com/channel/UCg_5c74BbqCVlCuiRrL-E1A">
+            <Link
+              legacyBehavior
+              href="https://www.youtube.com/channel/UCg_5c74BbqCVlCuiRrL-E1A"
+            >
               <a className="hover mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-400 text-slate-400 hover:border-primary hover:bg-primary hover:text-white">
                 <svg
                   className="fill-current"
@@ -91,7 +94,7 @@ const Footer = () => {
             </Link>
 
             {/* instagram */}
-            <Link href="https://www.instagram.com/kusenadev01/">
+            <Link legacyBehavior href="https://www.instagram.com/kusenadev01/">
               <a className="hover mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-400 text-slate-400 hover:border-primary hover:bg-primary hover:text-white">
                 <svg
                   role="img"
@@ -107,7 +110,10 @@ const Footer = () => {
             </Link>
 
             {/* facebook */}
-            <Link href="https://www.facebook.com/profile.php?id=100008397672983">
+            <Link
+              legacyBehavior
+              href="https://www.facebook.com/profile.php?id=100008397672983"
+            >
               <a className="hover mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-400 text-slate-400 hover:border-primary hover:bg-primary hover:text-white">
                 <svg
                   role="img"
@@ -123,7 +129,7 @@ const Footer = () => {
             </Link>
 
             {/* github */}
-            <Link href="https://github.com/kusenabdullah-123">
+            <Link legacyBehavior href="https://github.com/kusenabdullah-123">
               <a className="hover mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-400 text-slate-400 hover:border-primary hover:bg-primary hover:text-white">
                 <svg
                   role="img"

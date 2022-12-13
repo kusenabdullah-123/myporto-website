@@ -35,7 +35,10 @@ export default function Blogs({ data, type, url }) {
                         <ul className="blog_meta list">
                           <li>
                             <div className="flex items-center py-2 text-sm text-gray-500 dark:text-white">
-                              <Link href={`/blog/${item.kategori}`}>
+                              <Link
+                                legacyBehavior
+                                href={`/blog/${item.kategori}`}
+                              >
                                 <a>{item.kategori}</a>
                               </Link>
                               <span
@@ -142,7 +145,9 @@ export default function Blogs({ data, type, url }) {
                               priority
                               src={item.image}
                               alt={item.title}
-                              layout="fill"
+                              sizes="100vw"
+                              fill
+                              className="object-contain"
                             />
                           </div>
                         </figure>
