@@ -59,7 +59,6 @@ export default function Home({ url, portofolio, blogs }) {
 export async function getServerSideProps({ req, res }) {
   const url = process.env.NEXT_PUBLIC_URL;
   const blogs = await axios.get(`${url}api/blogs/?limit=3`);
-
   const portfolio = await axios.get(`${url}api/portofolio/?limit=2`);
   // res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
 
